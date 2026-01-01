@@ -1,8 +1,7 @@
 local cruiseActive = false
 local cruiseSpeed = 0.0
 
--- LEFT CTRL
-local CRUISE_KEY = 36
+local CRUISE_KEY = 36 --https://docs.fivem.net/docs/game-references/controls/
 
 Citizen.CreateThread(function()
     while true do
@@ -42,27 +41,23 @@ function DrawSpeedo()
     local speedMPH  = math.floor(GetEntitySpeed(vehicle) * 2.23694)
     local cruiseMPH = math.floor(cruiseSpeed * 2.23694)
 
-    -- Position links neben der Minimap
+
     local x = 0.255
     local y = 0.82
     local w = 0.16
     local h = 0.055
 
-    -- Hintergrund (flach & modern)
     DrawRect(x, y, w, h, 10, 10, 10, 160)
 
-    -- Akzentlinie
     if cruiseActive then
         DrawRect(x - w / 2 + 0.002, y, 0.004, h, 0, 170, 255, 255)
     else
         DrawRect(x - w / 2 + 0.002, y, 0.004, h, 180, 180, 180, 120)
     end
 
-    -- SPEED
     DrawText2D("SPEED", x - 0.07, y - 0.015, 0.32, 170)
     DrawText2D(speedMPH .. " MPH", x - 0.07, y + 0.005, 0.45, 255)
 
-    -- CRUISE
     if cruiseActive then
         DrawText2D("CRUISE", x + 0.02, y - 0.015, 0.32, 170)
         DrawText2D(cruiseMPH .. " MPH", x + 0.02, y + 0.005, 0.45, 0, 170, 255)
